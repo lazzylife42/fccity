@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/vnd.icon" href="/img/icons8-football-24.png">
+    <style>
+        /* Carrousel */
+        #clubCarousel {
+            max-width: 100%; /* Ajustez cette valeur selon la largeur souhaitée */
+            margin: 0 auto; /* Centrer le carrousel */
+        }
+    
+        .carousel-item {
+            height: 800px; /* Ajustez cette valeur pour définir la hauteur fixe du carrousel */
+        }
+    
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Maintient l'aspect ratio tout en remplissant l'espace */
+        }
+    
+        /* Articles */
+        .articles-list {
+            display: flex;
+            flex-direction: column; /* Afficher les articles en colonne */
+            gap: 1.5rem; /* Espace entre les articles */
+        }
+    
+        .article-card {
+            flex: 1 1 auto; /* Permet aux cartes de s'étirer selon leur contenu */
+            max-width: 100%; /* Assure que la carte occupe toute la largeur disponible */
+            margin-bottom: 1.5rem;
+            overflow: hidden; /* Évite que le texte dépasse les limites de la carte */
+        }
+    
+        .article-card img {
+            width: 100%; /* L'image occupe toute la largeur du conteneur */
+            height: auto; /* La hauteur de l'image est automatiquement ajustée pour conserver l'aspect ratio */
+            object-fit: cover; /* L'image remplit l'espace sans déformer l'aspect ratio */
+        }
+    
+        .article-card .card-body {
+            font-size: 1.25rem; /* Augmente la taille du texte dans les cartes */
+            padding: 1rem; /* Ajoute du padding pour que le texte ne touche pas les bords */
+            box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Logo Section -->
+        <div class="logo_section">
+            <div class="container">
+                <div class="logo">
+                    <a href="/index.html" class="custom-logo-link" rel="home">
+                        <img src="https://www.fccity.ch/newsite2/wp-content/uploads/cropped-city_logo_70-e1591961364197.png"
+                            alt="FC City" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /Logo Section -->
+
+        <!-- Navigation Menu -->
+        <div class="navigation_menu">
+            <nav id="site-navigation" class="navbar navbar-expand-md navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
+                    aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="menu" class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="/index.html">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/html/leclub.html">Le Club</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/html/cotisations.html">Cotisations</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="https://www.acgf.ch/association-cantonale-genevoise-de-football/association-acgf/clubs-acgf/club-acgf.aspx/v-830/">Matches
+                                actuels</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/html/charte.html">Charte éthique</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/html/boutique.html">Boutique</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/html/contact.html">Nous Contacter</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- /Navigation Menu -->
+
+        <!-- Carousel Section -->
+        <div id="clubCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#clubCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#clubCarousel" data-slide-to="1"></li>
+                <li data-target="#clubCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/img/photo1.jpg" class="d-block w-100" alt="FC City - Entraînement">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Entraînement FC City</h5>
+                        <p>Nos jeunes en action lors d'une séance d'entraînement.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/photo2.jpg" class="d-block w-100" alt="FC City - Match">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Match en plein air</h5>
+                        <p>Un de nos matchs en compétition officielle.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/photo3.jpg" class="d-block w-100" alt="FC City - Victoire">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Victoire de nos juniors</h5>
+                        <p>Félicitations à nos juniors pour cette victoire mémorable !</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#clubCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#clubCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!-- /Carousel Section -->
+
+        <!-- Articles Section -->
+        <div class="articles-section container my-5">
+            <h2 class="text-center mb-4" style="color: #005DA5;">Dernières actualités</h2>
+            <div class="articles-list">
+                <div class="article-card card shadow-sm">
+                    <img src="/img/photo1.jpg" class="card-img-top" alt="Inscriptions 2024-2025">
+                    <div class="card-body">
+                        <h5 class="card-title">Inscriptions 2024-2025</h5>
+                        <p class="card-text">Nous sommes malheureusement complet pour les enfants nés en 2012 à 2018.
+                            Aucune nouvelle inscription pour ces classes d'âge.</p>
+                        <p class="card-text"><small class="text-muted">30/07/24</small></p>
+                    </div>
+                </div>
+
+                <div class="article-card card shadow-sm">
+                    <img src="/img/photo2.jpg" class="card-img-top" alt="Reprise saison 2024/2025">
+                    <div class="card-body">
+                        <h5 class="card-title">Reprise saison 2024/2025</h5>
+                        <p class="card-text">
+                            <strong>Juniors A (2005-2007) :</strong> Lundi 22 juillet 18:45<br>
+                            <strong>Juniors B (2008-2009) :</strong> Lundi 5 août 18:45<br>
+                            <strong>Juniors C (2010-2011) :</strong> Lundi 5 août 18:45<br>
+                            <strong>Juniors D (2012-2013) :</strong> Mardi 13 août 17:15<br>
+                            <strong>Juniors E (2014-2015) :</strong> Lundi 12 août 17:15<br>
+                            <strong>Juniors F (2016-2017) :</strong> Lundi 19 août 17:15<br>
+                            <strong>Juniors G (2018) :</strong> Mercredi 21 août 17:15
+                        </p>
+                        <p class="card-text"><small class="text-muted">05/06/24</small></p>
+                    </div>
+                </div>
+
+                <div class="article-card card shadow-sm">
+                    <img src="/img/photo3.jpg" class="card-img-top" alt="Champion Genevois">
+                    <div class="card-body">
+                        <h5 class="card-title">Champion Genevois</h5>
+                        <p class="card-text">Bravo à nos juniors D pour leur parcours exemplaire. Champions Genevois
+                            2023-2024.</p>
+                        <p class="card-text"><small class="text-muted">25/05/24</small></p>
+                    </div>
+                </div>
+
+                <div class="article-card card shadow-sm">
+                    <img src="/img/photo4.jpg" class="card-img-top" alt="Remise de trophées">
+                    <div class="card-body">
+                        <h5 class="card-title">Remise de trophées</h5>
+                        <p class="card-text">La remise des trophées pour la saison 2023-2024 aura lieu le samedi 7 juin.
+                        </p>
+                        <p class="card-text"><small class="text-muted">01/05/24</small></p>
+                    </div>
+                </div>
+
+                <div class="article-card card shadow-sm">
+                    <img src="/img/photo5.jpg" class="card-img-top" alt="Félicitations Chiara">
+                    <div class="card-body">
+                        <h5 class="card-title">Félicitations Chiara</h5>
+                        <p class="card-text">Chiara, ancienne joueuse du FC City, a signé son premier contrat avec le
+                            Servette
+                            FCCF. Nous lui souhaitons plein de réussite dans cette nouvelle aventure.</p>
+                        <p class="card-text"><small class="text-muted">10/04/24</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Articles Section -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4">
+        <p>&copy; 2024 FC City. Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,285 @@
+html, body {
+    height: 100%; /* Assure que html et body occupent toute la hauteur de la fenêtre */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: linear-gradient(to bottom, #005da5, #ffffff);
+    background-size: cover; /* Couvre tout l'élément body */
+    background-repeat: no-repeat; /* Évite la répétition du fond */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Assure que le body a au moins la hauteur de la fenêtre */
+    margin: 0;
+    padding: 0;
+
+}
+
+.btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.wrapper {
+    flex: 1;
+}
+
+/* Logo Section */
+.logo_section {
+    background-color: #ffffff;
+    padding: 5px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
+}
+
+.logo_section .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_section .logo img {
+    max-height: 70px;
+}
+
+/* Navigation Menu */
+.navigation_menu {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="currentColor" stroke-width="2" d="M4 6h22M4 12h22M4 18h22" /%3E%3C/svg%3E');
+}
+
+.navbar-collapse {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 8px;
+}
+
+.navbar-nav .nav-link {
+    color: #000; /* Texte noir par défaut */
+    font-weight: bold;
+    font-size: 18px;
+    white-space: nowrap;
+    padding: 20px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff; /* Texte bleu au survol */
+}
+
+@media (max-width: 767.98px) {
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+    }
+}
+
+/* Main Content Styles */
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 0;
+}
+
+.filter-section {
+    display: flex;
+    align-items: flex-end;
+    background-color: transparent;
+    margin-bottom: 20px;
+}
+
+.filter-section h5 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-control {
+    border-radius: 4px;
+    border-color: #007bff;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* Styles pour toutes les cartes sans effet de survol */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 300px;
+    overflow: hidden;
+    transition: box-shadow 0.3s; /* Seulement ombre, pas de transformation */
+}
+
+/* Effet de survol uniquement pour les cartes de la boutique */
+.boutique-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    border-bottom: 2px solid #007bff;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+}
+
+.card-body {
+    background-color: #bcdcfd95;
+    border-top: 1px solid #007bff;
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+}
+
+.card-title {
+    color: #005DA5;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* CSS spécifique pour la carte de contact */
+.contact-card {
+    width: 100%;  /* Pour prendre toute la largeur du parent */
+    font-size: 20px; /* Ajustez la taille du texte selon vos besoins */
+    line-height: 1.2; /* Ajustez l'espacement entre les lignes si nécessaire */
+    max-width: none;  /* Pour annuler la limite de largeur */
+    margin: 0 auto;  /* Centrer si besoin */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Améliore l'ombre pour un effet plus pro */
+    padding: 20px;  /* Ajuste le padding */
+}
+
+.contact-card p {
+    margin-left: 20%;
+}
+
+/* Style spécifique pour la charte éthique */
+.ethique-card {
+    width: 100%;  /* Prend toute la largeur du parent */
+    max-width: none;  /* Annule la limite de largeur */
+    margin: 0 auto;  /* Centré */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre pour effet de profondeur */
+    padding: 20px;  /* Plus de padding pour une meilleure lisibilité */
+    background-color: #f8f9fa;  /* Fond clair pour le contraste */
+    line-height: 1.6;  /* Améliore la lisibilité du texte */
+}
+
+.ethique-card h4 {
+    color: #005DA5;  /* Couleur pour les sous-titres */
+    margin-top: 20px;
+    text-align: left;
+}
+
+.ethique-card p {
+    font-size: 20px; /* Ajustez la taille du texte selon vos besoins */
+    line-height: 1.5; /* Ajustez l'espacement entre les lignes si nécessaire */
+}
+
+/* Styles pour les tables */
+.table-container {
+    margin: 2rem auto;
+    max-width: 65%;
+    padding: 0 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: none;
+}
+
+.table thead {
+    background-color: transparent;
+    color: #005da5;
+}
+
+.table thead th {
+    border-bottom: none;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.qr-code-container {
+    margin: 2rem auto;
+    max-width: 75%;
+    text-align: center;
+}
+
+.qr-code-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    margin-top: auto;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Boutique</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="icon" type="image/vnd.icon" href="/img/icons8-football-24.png">
+</head>
+
+<body>
+	<!-- Logo Section -->
+	<div class="logo_section">
+		<div class="container">
+			<div class="logo">
+				<a href="/index.html" class="custom-logo-link" rel="home">
+					<img src="https://www.fccity.ch/newsite2/wp-content/uploads/cropped-city_logo_70-e1591961364197.png"
+						alt="FC City">
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Logo Section -->
+
+	<!-- Navigation Menu -->
+	<div class="navigation_menu">
+		<nav id="site-navigation" class="navbar navbar-expand-md navbar-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div id="menu" class="collapse navbar-collapse">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="/index.html">Accueil</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/leclub.html">Le Club</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/cotisations.html">Cotisations</a></li>
+					<li class="nav-item"><a class="nav-link"
+							href="https://www.acgf.ch/association-cantonale-genevoise-de-football/association-acgf/clubs-acgf/club-acgf.aspx/v-830/">Matches
+							actuels</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/charte.html">Charte éthique</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/boutique.html">Boutique</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/contact.html">Nous Contacter</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- /Navigation Menu -->
+
+	<!-- Main Content -->
+	<div class="container mt-4" style="background-color: transparent;">
+		<h1 class="my-4 text-center" style="color: #FFFFFF;">Catalogue</h1>
+		<div class="row">
+			<div class="col-md-4 category-filter">
+				<h5 class="text-center" style="color: #FFFFFF;">Filtrer par Catégorie</h5>
+				<select id="categoryFilter" class="form-control">
+					<option value="">Toutes les catégories</option>
+					<option value="Maillot">Maillots</option>
+					<option value="Short">Shorts</option>
+					<option value="Bas">Bas</option>
+					<option value="Sweat">Sweats</option>
+					<option value="Pantalon">Pantalons</option>
+					<option value="Jacket">Vestes</option>
+					<option value="Sac">Sacs</option>
+				</select>
+			</div>
+			<div class="col-md-8">
+				<h5 class="text-center" style="color: #FFFFFF;">Recherche</h5>
+				<input type="text" id="searchInput" class="form-control" placeholder="Rechercher...">
+			</div>
+		</div>
+		<div class="row my-4" id="productsContainer" style="align-items: center;">
+			<!-- Les produits seront chargés ici via JavaScript -->
+		</div>
+		</ <!-- Main Content (suite) -->
+	</div>
+	<!-- /Main Content -->
+
+	<!-- JavaScript Files -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		document.getElementById('categoryFilter').addEventListener('change', function () {
+			loadProducts();
+		});
+
+		document.getElementById('searchInput').addEventListener('input', function () {
+			loadProducts();
+		});
+
+		function loadProducts() {
+			const category = document.getElementById('categoryFilter').value;
+			const search = document.getElementById('searchInput').value;
+			fetch(`/api/products?category=${category}&search=${search}`)
+				.then(response => response.text())
+				.then(html => {
+					document.getElementById('productsContainer').innerHTML = html;
+				});
+		}
+
+		// Charger les produits au chargement de la page
+		loadProducts();
+	</script>
+</body>
+
+<!-- Footer -->
+<footer class="text-center py-4">
+	<p>&copy; 2024 FC City. Tous droits réservés.</p>
+</footer>
+
+</html>
