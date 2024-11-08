@@ -178,7 +178,7 @@ app.get('/api/products', async (req, res) => {
             
             return `
             <div class="col-md-3 mb-4" style="display: flex; justify-content: center; align-items: center;">
-                <div class="card" style="width: 100%; height: 400px;">
+                <div class="card" style="width: 100%; height: 300px;">
                     <img src="${imageUrl}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
                     <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                         <h5 class="card-title">${product.name}</h5>
