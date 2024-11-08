@@ -34,7 +34,7 @@ nuke:
 	$(DOCKER) rmi $(IMAGE_NAME) || true
 	$(DOCKER) system prune -a -f --volumes
 
-re : make down; make build; make up
+re: down build up
 
 # Voir les logs du conteneur
 logs:

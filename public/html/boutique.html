@@ -9,6 +9,61 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	<link rel="stylesheet" href="/css/styles.css">
 	<link rel="icon" type="image/vnd.icon" href="/img/icons8-football-24.png">
+	<style>
+		/* Style pour la box de filtrage horizontale */
+		.filter-box {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 20px;
+			align-items: center;
+			gap: 20px;
+			/* Ajoute un espace uniforme entre les sections */
+		}
+
+		.filter-box .filter-section {
+			flex: 1;
+			text-align: center;
+			/* Centre le contenu des sections */
+		}
+
+		.filter-box .filter-section h5 {
+			margin-bottom: 10px;
+		}
+
+		/* Style pour les boutons "Enfant" et "Adulte" remplis */
+		.filter-box .filter-section button {
+			width: 100%;
+			background-color: #fff;
+			color: #007bff;
+			border: 1px solid #007bff;
+			font-weight: bold;
+			text-align: center;
+			/* Assure que le texte dans les boutons est centré */
+		}
+
+		.filter-box .filter-section button.active {
+			background-color: #007bff;
+			color: #fff;
+		}
+
+		.filter-box .filter-section button:hover {
+			background-color: #007bff;
+			color: #fff;
+		}
+
+		.card-text {
+			display: -webkit-box;
+			/* Utiliser un box flexible en mode Webkit */
+			-webkit-box-orient: vertical;
+			/* Orientation verticale */
+			-webkit-line-clamp: 2;
+			/* Limiter le texte à 2 lignes */
+			overflow: hidden;
+			/* Cacher tout texte qui dépasse */
+			text-overflow: ellipsis;
+			/* Ajouter "..." à la fin du texte coupé */
+		}
+	</style>
 </head>
 
 <body>
@@ -52,9 +107,12 @@
 	<!-- Main Content -->
 	<div class="container mt-4" style="background-color: transparent;">
 		<h1 class="my-4 text-center" style="color: #FFFFFF;">Catalogue</h1>
-		<div class="row">
-			<div class="col-md-4 category-filter">
-				<h5 class="text-center" style="color: #FFFFFF;">Filtrer par Catégorie</h5>
+
+		<!-- Box de filtrage -->
+		<div class="filter-box">
+			<!-- Filtrer par catégorie -->
+			<div class="filter-section">
+				<h5 class="text-center" style="color: #FFFFFF;"></h5>
 				<select id="categoryFilter" class="form-control">
 					<option value="">Toutes les catégories</option>
 					<option value="Maillot">Maillots</option>
@@ -66,15 +124,24 @@
 					<option value="Sac">Sacs</option>
 				</select>
 			</div>
-			<div class="col-md-8">
-				<h5 class="text-center" style="color: #FFFFFF;">Recherche</h5>
+
+			<!-- Filtrer par public -->
+			<div class="filter-section">
+				<h5 class="text-center" style="color: #FFFFFF;"></h5>
+				<button id="kidsFilter" class="btn btn-outline-primary m-1 w-100">Enfant</button>
+				<button id="adultFilter" class="btn btn-outline-primary m-1 w-100">Adulte</button>
+			</div>
+
+			<!-- Recherche -->
+			<div class="filter-section">
+				<h5 class="text-center" style="color: #FFFFFF;"></h5>
 				<input type="text" id="searchInput" class="form-control" placeholder="Rechercher...">
 			</div>
 		</div>
+
 		<div class="row my-4" id="productsContainer" style="align-items: center;">
 			<!-- Les produits seront chargés ici via JavaScript -->
 		</div>
-		</ <!-- Main Content (suite) -->
 	</div>
 	<!-- /Main Content -->
 
@@ -83,23 +150,41 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script>
-		document.getElementById('categoryFilter').addEventListener('change', function () {
-			loadProducts();
-		});
+		// Variables globales pour les filtres
+		let isKidsFilterActive = false;
+		let isAdultFilterActive = false;
 
-		document.getElementById('searchInput').addEventListener('input', function () {
-			loadProducts();
-		});
-
+		// Fonction pour charger les produits
 		function loadProducts() {
 			const category = document.getElementById('categoryFilter').value;
 			const search = document.getElementById('searchInput').value;
-			fetch(`/api/products?category=${category}&search=${search}`)
+
+			// Ajouter les filtres "Enfant" et "Adulte" si activés
+			const kidsFilter = isKidsFilterActive ? 'true' : '';
+			const adultFilter = isAdultFilterActive ? 'true' : '';
+
+			fetch(`/api/products?category=${category}&search=${search}&kids=${kidsFilter}&adult=${adultFilter}`)
 				.then(response => response.text())
 				.then(html => {
 					document.getElementById('productsContainer').innerHTML = html;
 				});
 		}
+
+		// Ajouter des écouteurs d'événements aux boutons
+		document.getElementById('categoryFilter').addEventListener('change', loadProducts);
+		document.getElementById('searchInput').addEventListener('input', loadProducts);
+
+		document.getElementById('kidsFilter').addEventListener('click', function () {
+			isKidsFilterActive = !isKidsFilterActive;
+			this.classList.toggle('active', isKidsFilterActive);
+			loadProducts();
+		});
+
+		document.getElementById('adultFilter').addEventListener('click', function () {
+			isAdultFilterActive = !isAdultFilterActive;
+			this.classList.toggle('active', isAdultFilterActive);
+			loadProducts();
+		});
 
 		// Charger les produits au chargement de la page
 		loadProducts();
