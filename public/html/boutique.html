@@ -16,6 +16,7 @@
 			justify-content: space-between;
 			margin-bottom: 20px;
 			align-items: center;
+			margin-left: 10px;
 			gap: 20px;
 			/* Ajoute un espace uniforme entre les sections */
 		}
@@ -27,6 +28,7 @@
 		}
 
 		.filter-box .filter-section h5 {
+			margin-top: 10px;
 			margin-bottom: 10px;
 		}
 
@@ -49,19 +51,6 @@
 		.filter-box .filter-section button:hover {
 			background-color: #007bff;
 			color: #fff;
-		}
-
-		.card-text {
-			display: -webkit-box;
-			/* Utiliser un box flexible en mode Webkit */
-			-webkit-box-orient: vertical;
-			/* Orientation verticale */
-			-webkit-line-clamp: 2;
-			/* Limiter le texte à 2 lignes */
-			overflow: hidden;
-			/* Cacher tout texte qui dépasse */
-			text-overflow: ellipsis;
-			/* Ajouter "..." à la fin du texte coupé */
 		}
 	</style>
 </head>
@@ -112,7 +101,7 @@
 		<div class="filter-box">
 			<!-- Filtrer par catégorie -->
 			<div class="filter-section">
-				<h5 class="text-center" style="color: #FFFFFF;"></h5>
+				<h5 class="text-center" style="color: #FFFFFF;margin-top: 47px;"></h5>
 				<select id="categoryFilter" class="form-control">
 					<option value="">Toutes les catégories</option>
 					<option value="Maillot">Maillots</option>
@@ -134,7 +123,7 @@
 
 			<!-- Recherche -->
 			<div class="filter-section">
-				<h5 class="text-center" style="color: #FFFFFF;"></h5>
+				<h5 class="text-center" style="color: #FFFFFF;margin-top: 47px;"></h5>
 				<input type="text" id="searchInput" class="form-control" placeholder="Rechercher...">
 			</div>
 		</div>
