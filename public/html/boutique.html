@@ -15,16 +15,14 @@
 			display: flex;
 			justify-content: space-between;
 			margin-bottom: 20px;
-			align-items: center;
+			align-items: flex-start !important;
 			margin-left: 10px;
 			gap: 20px;
-			/* Ajoute un espace uniforme entre les sections */
 		}
 
 		.filter-box .filter-section {
 			flex: 1;
 			text-align: center;
-			/* Centre le contenu des sections */
 		}
 
 		.filter-box .filter-section h5 {
@@ -32,7 +30,6 @@
 			margin-bottom: 10px;
 		}
 
-		/* Style pour les boutons "Enfant" et "Adulte" remplis */
 		.filter-box .filter-section button {
 			width: 100%;
 			background-color: #fff;
@@ -40,7 +37,7 @@
 			border: 1px solid #007bff;
 			font-weight: bold;
 			text-align: center;
-			/* Assure que le texte dans les boutons est centré */
+			margin-top:0 !important;
 		}
 
 		.filter-box .filter-section button.active {
@@ -51,6 +48,83 @@
 		.filter-box .filter-section button:hover {
 			background-color: #007bff;
 			color: #fff;
+		}
+
+		.cart-icon {
+			position: fixed;
+			top: 40px;
+			right: 40px;
+			z-index: 1000;
+			background: white;
+			padding: 10px;
+			border-radius: 50%;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			cursor: pointer;
+			transition: transform 0.2s;
+		}
+
+		.cart-icon:hover {
+			transform: scale(1.1);
+		}
+
+		.cart-badge {
+			position: absolute;
+			top: -5px;
+			right: -5px;
+			background-color: #007bff;
+			color: white;
+			border-radius: 50%;
+			padding: 3px 6px;
+			font-size: 12px;
+		}
+
+		/* Style pour les items du panier */
+		.cart-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px;
+			border-bottom: 1px solid #eee;
+		}
+
+		.cart-item-info {
+			flex-grow: 1;
+			margin-right: 10px;
+		}
+
+		.cart-total {
+			font-weight: bold;
+			margin-top: 20px;
+			padding-top: 10px;
+			border-top: 2px solid #007bff;
+		}
+
+		.remove-item {
+			color: #dc3545;
+			cursor: pointer;
+			padding: 5px;
+		}
+
+		/* Style pour les filtres */
+		.filter-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+			margin: 0 auto;
+			max-width: 900px;
+			padding: 20px;
+		}
+
+		.filter-section {
+			flex: 1;
+			min-width: 200px;
+			max-width: 300px;
+		}
+
+		.btn-group {
+			display: flex;
+			gap: 10px;
 		}
 	</style>
 </head>
@@ -93,15 +167,15 @@
 	</div>
 	<!-- /Navigation Menu -->
 
+
+
 	<!-- Main Content -->
 	<div class="container mt-4" style="background-color: transparent;">
 		<h1 class="my-4 text-center" style="color: #FFFFFF;">Catalogue</h1>
 
 		<!-- Box de filtrage -->
 		<div class="filter-box">
-			<!-- Filtrer par catégorie -->
 			<div class="filter-section">
-				<h5 class="text-center" style="color: #FFFFFF;margin-top: 47px;"></h5>
 				<select id="categoryFilter" class="form-control">
 					<option value="">Toutes les catégories</option>
 					<option value="Maillot">Maillots</option>
@@ -114,18 +188,18 @@
 				</select>
 			</div>
 
-			<!-- Filtrer par public -->
 			<div class="filter-section">
-				<h5 class="text-center" style="color: #FFFFFF;"></h5>
 				<button id="kidsFilter" class="btn btn-outline-primary m-1 w-100">Enfant</button>
 				<button id="adultFilter" class="btn btn-outline-primary m-1 w-100">Adulte</button>
 			</div>
 
-			<!-- Recherche -->
 			<div class="filter-section">
-				<h5 class="text-center" style="color: #FFFFFF;margin-top: 47px;"></h5>
 				<input type="text" id="searchInput" class="form-control" placeholder="Rechercher...">
 			</div>
+		</div>
+		<div class="cart-icon" id="cartIcon">
+			<i class="fas fa-shopping-cart"></i>
+			<span class="cart-badge" id="cartCount">0</span>
 		</div>
 
 		<div class="row my-4" id="productsContainer" style="align-items: center;">
@@ -134,55 +208,202 @@
 	</div>
 	<!-- /Main Content -->
 
+	<!-- Modal d'ajout au panier -->
+	<div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addToCartModalLabel">Ajouter au panier</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Voulez-vous ajouter cet article au panier ?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+					<button type="button" id="confirmAddToCart" class="btn btn-primary">Ajouter au panier</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Ajoutez le modal du panier -->
+	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="cartModalLabel">Votre Panier</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="cartItemsContainer">
+						<!-- Les items du panier seront ajoutés ici -->
+					</div>
+					<div class="cart-total" id="cartTotal">
+						Total: 0.00 CHF
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Continuer mes achats</button>
+					<button type="button" class="btn btn-primary" id="checkoutBtn">Commander</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- JavaScript Files -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script>
-		// Variables globales pour les filtres
+		// Gestion du panier
+		let cartItems = [];
+
+		function updateCartBadge() {
+			const cartCount = document.getElementById('cartCount');
+			cartCount.textContent = cartItems.length;
+			if (cartItems.length > 0) {
+				cartCount.style.display = 'block';
+			} else {
+				cartCount.style.display = 'none';
+			}
+		}
+
+		function calculateTotal() {
+			return cartItems.reduce((total, item) => {
+				const price = parseFloat(item.price.replace('CHF', '').trim());
+				return total + price;
+			}, 0);
+		}
+
+		function updateCartModal() {
+			const cartItemsContainer = document.getElementById('cartItemsContainer');
+			cartItemsContainer.innerHTML = '';
+
+			if (cartItems.length === 0) {
+				cartItemsContainer.innerHTML = '<p class="text-center">Votre panier est vide.</p>';
+			} else {
+				cartItems.forEach((item, index) => {
+					const itemElement = document.createElement('div');
+					itemElement.className = 'cart-item';
+					itemElement.innerHTML = `
+                <div class="cart-item-info">
+                    <strong>${item.name}</strong>
+                    <div>${item.price}</div>
+                </div>
+                <i class="fas fa-trash remove-item" onclick="removeFromCart(${index})"></i>
+            `;
+					cartItemsContainer.appendChild(itemElement);
+				});
+			}
+
+			// Mise à jour du total
+			const total = calculateTotal();
+			document.getElementById('cartTotal').textContent = `Total: ${total.toFixed(2)} CHF`;
+		}
+
+		function showCartModal() {
+			updateCartModal();
+			$('#cartModal').modal('show');
+		}
+
+		function removeFromCart(index) {
+			cartItems.splice(index, 1);
+			updateCartBadge();
+			updateCartModal();
+		}
+
+		function addToCart(productName, productPrice) {
+			cartItems.push({ name: productName, price: productPrice });
+			updateCartBadge();
+
+			// Afficher une notification
+			const toast = document.createElement('div');
+			toast.className = 'alert alert-success position-fixed';
+			toast.style.top = '20px';
+			toast.style.right = '20px';
+			toast.style.zIndex = '1050';
+			toast.textContent = 'Produit ajouté au panier !';
+			document.body.appendChild(toast);
+
+			setTimeout(() => toast.remove(), 2000);
+		}
+
+		// Gestion des filtres
 		let isKidsFilterActive = false;
 		let isAdultFilterActive = false;
 
-		// Fonction pour charger les produits
-		function loadProducts() {
+		async function loadProducts() {
 			const category = document.getElementById('categoryFilter').value;
 			const search = document.getElementById('searchInput').value;
-
-			// Ajouter les filtres "Enfant" et "Adulte" si activés
 			const kidsFilter = isKidsFilterActive ? 'true' : '';
 			const adultFilter = isAdultFilterActive ? 'true' : '';
 
-			fetch(`/api/products?category=${category}&search=${search}&kids=${kidsFilter}&adult=${adultFilter}`)
-				.then(response => response.text())
-				.then(html => {
-					document.getElementById('productsContainer').innerHTML = html;
-				});
+			try {
+				const response = await fetch(`/api/products?category=${category}&search=${search}&kids=${kidsFilter}&adult=${adultFilter}`);
+				const html = await response.text();
+				document.getElementById('productsContainer').innerHTML = html;
+				attachClickEventToProducts();
+			} catch (error) {
+				console.error("Erreur lors du chargement des produits:", error);
+			}
 		}
 
-		// Ajouter des écouteurs d'événements aux boutons
-		document.getElementById('categoryFilter').addEventListener('change', loadProducts);
-		document.getElementById('searchInput').addEventListener('input', loadProducts);
+		function attachClickEventToProducts() {
+			const productCards = document.querySelectorAll('.card');
+			productCards.forEach(card => {
+				card.addEventListener('click', function () {
+					const productName = this.querySelector('.card-title').textContent;
+					const productPrice = this.querySelector('.card-text').textContent;
 
-		document.getElementById('kidsFilter').addEventListener('click', function () {
-			isKidsFilterActive = !isKidsFilterActive;
-			this.classList.toggle('active', isKidsFilterActive);
+					document.getElementById('addToCartModalLabel').textContent = `Ajouter ${productName} au panier`;
+					$('#addToCartModal').modal('show');
+
+					document.getElementById('confirmAddToCart').onclick = function () {
+						addToCart(productName, productPrice);
+						$('#addToCartModal').modal('hide');
+					};
+				});
+			});
+		}
+
+		// Initialisation
+		document.addEventListener('DOMContentLoaded', function () {
+			// Initialiser les filtres
 			loadProducts();
-		});
 
-		document.getElementById('adultFilter').addEventListener('click', function () {
-			isAdultFilterActive = !isAdultFilterActive;
-			this.classList.toggle('active', isAdultFilterActive);
-			loadProducts();
-		});
+			// Event listeners pour les filtres
+			document.getElementById('categoryFilter').addEventListener('change', loadProducts);
+			document.getElementById('searchInput').addEventListener('input', loadProducts);
 
-		// Charger les produits au chargement de la page
-		loadProducts();
+			document.getElementById('kidsFilter').addEventListener('click', function () {
+				isKidsFilterActive = !isKidsFilterActive;
+				this.classList.toggle('active', isKidsFilterActive);
+				loadProducts();
+			});
+
+			document.getElementById('adultFilter').addEventListener('click', function () {
+				isAdultFilterActive = !isAdultFilterActive;
+				this.classList.toggle('active', isAdultFilterActive);
+				loadProducts();
+			});
+
+			// Event listener pour le panier
+			document.getElementById('cartIcon').addEventListener('click', showCartModal);
+
+			// Event listener pour le bouton de commande
+			document.getElementById('checkoutBtn').addEventListener('click', function () {
+				if (cartItems.length > 0) {
+					alert('Redirection vers la page de paiement...');
+					// Ajoutez ici la logique pour rediriger vers la page de paiement
+				}
+			});
+		});
 	</script>
 </body>
-
-<!-- Footer -->
-<footer class="text-center py-4">
-	<p>&copy; 2024 FC City. Tous droits réservés.</p>
-</footer>
 
 </html>
