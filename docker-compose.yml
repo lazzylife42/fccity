@@ -1,0 +1,15 @@
+services:
+  fc-city:
+    platform: linux/arm64
+    container_name: fc-city-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-3000}:3000"
+      - "${ADMIN_PORT:-8090}:8090"
+    volumes:
+      - ./pb_data:/app/pb_data
+      - ./pb_migrations:/app/pb_migrations
+    environment:
+      - POCKETBASE_URL=http://localhost:8090

@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# PocketBase
+pb_data.db
+pocketbase*
+*.db-shm
+*.db-wal
+
+# Include pb_data for article generation
+!pb_data/data.db
+
+# Environment variables
+.env
+.env.*
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+out/
+
+# Cache directories
+.cache/
+.npm/
+
+# Optional: Docker volumes
+docker-volumes/
+
+todo.txt

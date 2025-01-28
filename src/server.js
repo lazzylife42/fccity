@@ -2,7 +2,7 @@ import express from 'express';
 import PocketBase from 'pocketbase';
 import fetch from 'node-fetch';
 
-const pb = new PocketBase(process.env.POCKETBASE_URL || 'http://127.0.0.1:8090');
+const pb = new PocketBase('http://localhost:8090');
 const app = express();
 
 app.use(express.static('public'));
