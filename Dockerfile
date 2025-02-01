@@ -1,5 +1,5 @@
 # Étape 1 : Utilisation d'une image Node.js officielle
-FROM --platform=linux/arm64 node:18-bullseye
+FROM node:18-bullseye
 
 # Définir le répertoire de travail
 WORKDIR /app
@@ -10,10 +10,11 @@ COPY package*.json ./
 # Installer les dépendances Node.js
 RUN npm install && npm install node-fetch
 
-# Étape 2 : Télécharger et installer PocketBase pour Linux ARM64  # changer en _linux_amd64 en prod
+# Étape 2 : Télécharger et installer PocketBase pour Linux AMD64
 RUN apt-get update && apt-get install -y curl unzip && \
-    curl -L -o pocketbase_linux.zip https://github.com/pocketbase/pocketbase/releases/download/v0.16.7/pocketbase_0.16.7_linux_arm64.zip && \
-    chmod +x pocketbase && \
+    curl -L -o pocketbase_linux.zip https://github.com/pocketbase/pocketbase/releases/download/v0.16.7/pocketbase_0.16.7_linux_amd64.zip && \
+    unzip pocketbase_linux.zip && \
+    chmod +x ./pocketbase && \
     rm pocketbase_linux.zip
 
 # Étape 3 : Copier le reste des fichiers dans le conteneur
