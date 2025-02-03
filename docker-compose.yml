@@ -1,3 +1,4 @@
+version: '3'
 services:
   fc-city:
     container_name: fc-city-container
@@ -11,4 +12,8 @@ services:
       - ./pb_data:/app/pb_data
       - ./pb_migrations:/app/pb_migrations
     environment:
+      - PORT=3000
+      - ADMIN_PORT=8090
+      - SENDGRID_API_KEY=
+      - STORE_EMAIL=
       - POCKETBASE_URL=http://localhost:8090
