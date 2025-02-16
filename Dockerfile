@@ -7,9 +7,6 @@ WORKDIR /app
 # Copier package.json et package-lock.json
 COPY package*.json ./
 
-# Installer les dépendances Node.js (optionnel lors du build, peut être retiré si vous installez au démarrage)
-RUN npm install && npm install node-fetch
-
 # Étape 2 : Télécharger et installer PocketBase pour Linux AMD64
 RUN apt-get update && apt-get install -y curl unzip && \
     curl -L -o pocketbase_linux.zip https://github.com/pocketbase/pocketbase/releases/download/v0.16.7/pocketbase_0.16.7_linux_amd64.zip && \
@@ -17,11 +14,14 @@ RUN apt-get update && apt-get install -y curl unzip && \
     chmod +x ./pocketbase && \
     rm pocketbase_linux.zip
 
-# Étape 3 : Copier le reste des fichiers dans le conteneur
+# Installer les dépendances Node.js
+RUN npm install && npm install node-fetch
+
+# Copier le reste des fichiers
 COPY . .
 
-# Étape 4 : Exposer les ports pour le serveur Express et PocketBase
-EXPOSE 8090 3000
+# Exposer les ports
+EXPOSE 3000 8090
 
-# Étape 5 : Commande pour installer les packages et exécuter PocketBase et le serveur Node.js
+# Script de démarrage modifié
 CMD ["sh", "-c", "npm install && ./pocketbase serve --http=0.0.0.0:8090 & node src/server.js"]
