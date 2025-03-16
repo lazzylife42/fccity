@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Boutique</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="icon" type="image/vnd.icon" href="/img/icons8-football-24.png">
+</head>
+
+<body>
+	<!-- Logo Section -->
+	<div class="logo_section">
+		<div class="container">
+			<div class="logo">
+				<a href="/index.html" class="custom-logo-link" rel="home">
+					<img src="https://www.fccity.ch/newsite2/wp-content/uploads/cropped-city_logo_70-e1591961364197.png"
+						alt="FC City">
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Logo Section -->
+
+	<!-- Navigation Menu -->
+	<div class="navigation_menu">
+		<nav id="site-navigation" class="navbar navbar-expand-md navbar-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div id="menu" class="collapse navbar-collapse">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="/index.html">Accueil</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/leclub.html">Le Club</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/cotisations.html">Cotisations</a></li>
+					<li class="nav-item"><a class="nav-link"
+							href="https://www.acgf.ch/association-cantonale-genevoise-de-football/association-acgf/clubs-acgf/club-acgf.aspx/v-830/">Matches
+							actuels</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/charte.html">Charte éthique</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/boutique.html">Boutique</a></li>
+					<li class="nav-item"><a class="nav-link" href="/html/contact.html">Nous Contacter</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- /Navigation Menu -->
+<!-- Main Content -->
+<div class="container mt-4">
+	<h1 class="my-4 text-center">Boutique FC City</h1>
+
+	<!-- Box de filtrage -->
+	<div class="filter-box">
+		<div class="filter-section">
+			<select id="categoryFilter" class="form-control">
+				<option value="">Toutes les catégories</option>
+				<option value="Maillot">Maillots</option>
+				<option value="Short">Shorts</option>
+				<option value="Bas">Bas</option>
+				<option value="Sweat">Sweats</option>
+				<option value="Pantalon">Pantalons</option>
+				<option value="Jacket">Vestes</option>
+				<option value="Sac">Sacs</option>
+				<option value="autre">Autre</option>
+			</select>
+		</div>
+
+		<div class="filter-section">
+			<button id="kidsFilter" class="btn btn-outline-primary m-1 w-100">Enfant</button>
+			<button id="adultFilter" class="btn btn-outline-primary m-1 w-100">Adulte</button>
+		</div>
+
+		<div class="filter-section">
+			<input type="text" id="searchInput" class="form-control" placeholder="Rechercher...">
+		</div>
+	</div>
+
+	<div class="cart-icon" id="cartIcon">
+		<i class="fas fa-shopping-cart"></i>
+		<span class="cart-badge" id="cartCount">0</span>
+	</div>
+
+	<div class="row my-4" id="productsContainer">
+		<!-- Les produits seront chargés ici via JavaScript -->
+	</div>
+</div>
+
+<!-- Modal du panier -->
+<div class="modal fade" id="cartModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Votre Panier</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="cartItemsContainer"></div>
+				<div class="cart-total mt-3" id="cartTotal">
+					Total: 0.00 CHF
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Continuer mes achats</button>
+				<button type="button" class="btn btn-primary" id="checkoutBtn">Commander</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal d'ajout au panier -->
+<div class="modal fade" id="addToCartModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addToCartModalLabel">Détails du produit</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<img id="modalProductImage" class="img-fluid" alt="Product Image">
+					</div>
+					<div class="col-md-6">
+						<h4 id="modalProductName"></h4>
+						<p id="modalProductPrice" class="font-weight-bold"></p>
+						<div class="form-group">
+							<label for="sizeSelect">Sélectionnez une taille :</label>
+							<select class="form-control" id="sizeSelect" required>
+								<option value="">Choisir une taille</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+				<button type="button" id="confirmAddToCart" class="btn btn-primary">Ajouter au panier</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal de commande -->
+<div class="modal fade" id="checkoutFormModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Finaliser la commande</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="checkoutForm">
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<label for="firstName">Prénom</label>
+							<input type="text" class="form-control" id="firstName" required>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="lastName">Nom</label>
+							<input type="text" class="form-control" id="lastName" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" class="form-control" id="email" required>
+					</div>
+					<div class="form-group">
+						<label for="phone">Téléphone</label>
+						<input type="tel" class="form-control" id="phone" required>
+					</div>
+					<div class="form-group">
+						<label for="address">Adresse</label>
+						<input type="text" class="form-control" id="address" required>
+					</div>
+					<div class="row">
+						<div class="col-md-4 form-group">
+							<label for="postalCode">Code Postal</label>
+							<input type="text" class="form-control" id="postalCode" required>
+						</div>
+						<div class="col-md-8 form-group">
+							<label for="city">Ville</label>
+							<input type="text" class="form-control" id="city" required>
+						</div>
+					</div>
+					<div class="alert alert-success" id="orderSuccess" style="display: none;">
+						Votre commande a été envoyée avec succès !
+					</div>
+					<div class="alert alert-danger" id="orderError" style="display: none;">
+						Une erreur est survenue lors de l'envoi de la commande.
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+				<button type="submit" form="checkoutForm" class="btn btn-primary">Confirmer la commande</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Scripts nécessaires -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+// Gestion du panier
+let cartItems = [];
+
+function updateCartBadge() {
+    const cartCount = document.getElementById('cartCount');
+    cartCount.textContent = cartItems.length;
+    cartCount.style.display = cartItems.length > 0 ? 'block' : 'none';
+}
+
+function calculateTotal() {
+    return cartItems.reduce((total, item) => {
+        const price = parseFloat(item.price.replace('CHF', '').trim());
+        return total + price;
+    }, 0);
+}
+
+function updateCartModal() {
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    cartItemsContainer.innerHTML = '';
+
+    if (cartItems.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="text-center">Votre panier est vide.</p>';
+    } else {
+        cartItems.forEach((item, index) => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'cart-item';
+            itemElement.innerHTML = `
+                <div class="cart-item-info">
+                    <strong>${item.name}</strong>
+                    <div>${item.price} - Taille: ${item.size}</div>
+                </div>
+                <i class="fas fa-trash remove-item" onclick="removeFromCart(${index})"></i>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+        });
+    }
+
+    const total = calculateTotal();
+    document.getElementById('cartTotal').textContent = `Total: ${total.toFixed(2)} CHF`;
+}
+
+function showCartModal() {
+    updateCartModal();
+    $('#cartModal').modal('show');
+}
+
+function removeFromCart(index) {
+    cartItems.splice(index, 1);
+    updateCartBadge();
+    updateCartModal();
+}
+
+function addToCart(productName, productPrice, selectedSize) {
+    cartItems.push({ 
+        name: productName, 
+        price: productPrice,
+        size: selectedSize 
+    });
+    updateCartBadge();
+
+    const toast = document.createElement('div');
+    toast.className = 'alert alert-success position-fixed';
+    toast.style.top = '20px';
+    toast.style.right = '20px';
+    toast.style.zIndex = '1050';
+    toast.textContent = 'Produit ajouté au panier !';
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 2000);
+}
+// Gestion des filtres
+let isKidsFilterActive = false;
+let isAdultFilterActive = false;
+
+async function loadProducts() {
+    const category = document.getElementById('categoryFilter').value;
+    const search = document.getElementById('searchInput').value;
+    const kidsFilter = isKidsFilterActive ? 'true' : '';
+    const adultFilter = isAdultFilterActive ? 'true' : '';
+
+    try {
+        const response = await fetch(`/api/products?category=${category}&search=${search}&kids=${kidsFilter}&adult=${adultFilter}`);
+        const html = await response.text();
+        document.getElementById('productsContainer').innerHTML = html;
+        attachClickEventToProducts();
+    } catch (error) {
+        console.error("Erreur lors du chargement des produits:", error);
+    }
+}
+
+function attachClickEventToProducts() {
+    const productCards = document.querySelectorAll('.card');
+    productCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const productName = this.dataset.productName;
+            const productPrice = this.dataset.productPrice;
+            const productImage = this.dataset.productImage;
+            const sizes = JSON.parse(this.dataset.productSizes || '[]');
+
+            // Mettre à jour le modal avec les informations du produit
+            document.getElementById('modalProductName').textContent = productName;
+            document.getElementById('modalProductPrice').textContent = `${productPrice} CHF`;
+            document.getElementById('modalProductImage').src = productImage;
+
+            // Remplir le select des tailles
+            const sizeSelect = document.getElementById('sizeSelect');
+            sizeSelect.innerHTML = '<option value="">Choisir une taille</option>';
+            
+            if (sizes && Array.isArray(sizes)) {
+                sizes.forEach(size => {
+                    const option = document.createElement('option');
+                    option.value = size;
+                    option.textContent = size;
+                    sizeSelect.appendChild(option);
+                });
+            }
+
+            $('#addToCartModal').modal('show');
+
+            document.getElementById('confirmAddToCart').onclick = function() {
+                const selectedSize = sizeSelect.value;
+                if (!selectedSize) {
+                    alert('Veuillez sélectionner une taille');
+                    return;
+                }
+                addToCart(productName, productPrice, selectedSize);
+                $('#addToCartModal').modal('hide');
+            };
+        });
+    });
+}
+// Gestion du formulaire de commande
+document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        postalCode: document.getElementById('postalCode').value,
+        city: document.getElementById('city').value,
+        orderItems: cartItems
+    };
+
+    try {
+        const response = await fetch('/api/submit-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erreur lors de l\'envoi de la commande');
+        }
+
+        document.getElementById('orderSuccess').style.display = 'block';
+        document.getElementById('orderError').style.display = 'none';
+        
+        // Vider le panier après une commande réussie
+        cartItems = [];
+        updateCartBadge();
+        
+        // Fermer les modals après quelques secondes
+        setTimeout(() => {
+            $('#checkoutFormModal').modal('hide');
+            document.getElementById('checkoutForm').reset();
+        }, 2000);
+    } catch (error) {
+        document.getElementById('orderSuccess').style.display = 'none';
+        document.getElementById('orderError').style.display = 'block';
+        console.error('Erreur:', error);
+    }
+});
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialiser les filtres
+    loadProducts();
+
+    // Event listeners pour les filtres
+    document.getElementById('categoryFilter').addEventListener('change', loadProducts);
+    document.getElementById('searchInput').addEventListener('input', loadProducts);
+
+    document.getElementById('kidsFilter').addEventListener('click', function() {
+        isKidsFilterActive = !isKidsFilterActive;
+        this.classList.toggle('active', isKidsFilterActive);
+        loadProducts();
+    });
+
+    document.getElementById('adultFilter').addEventListener('click', function() {
+        isAdultFilterActive = !isAdultFilterActive;
+        this.classList.toggle('active', isAdultFilterActive);
+        loadProducts();
+    });
+
+    // Event listener pour le panier
+    document.getElementById('cartIcon').addEventListener('click', showCartModal);
+
+    // Event listener pour le bouton de commande
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+        if (cartItems.length === 0) {
+            alert('Votre panier est vide');
+            return;
+        }
+
+        $('#cartModal').modal('hide');
+        $('#checkoutFormModal').modal('show');
+    });
+});
+</script>
+</body>
+</html>

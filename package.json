@@ -1,0 +1,14 @@
+{
+  "name": "fc-city",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pocketbase": "^0.16.0",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.9"
+  }
+}

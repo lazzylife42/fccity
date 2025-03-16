@@ -1,0 +1,456 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: linear-gradient(to bottom, #005da5, #ffffff);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.btn.active {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+.wrapper {
+    flex: 1;
+}
+
+/* Logo Section */
+.logo_section {
+    background-color: #ffffff;
+    padding: 5px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
+}
+
+.logo_section .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_section .logo img {
+    max-height: 70px;
+}
+
+/* Navigation Menu */
+.navigation_menu {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="currentColor" stroke-width="2" d="M4 6h22M4 12h22M4 18h22" /%3E%3C/svg%3E');
+}
+
+.navbar-collapse {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 8px;
+}
+
+.navbar-nav .nav-link {
+    color: #000;
+    font-weight: bold;
+    font-size: 18px;
+    white-space: nowrap;
+    padding: 20px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+@media (max-width: 767.98px) {
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+    }
+}
+
+/* Main Content Styles */
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 0;
+}
+
+.filter-section {
+    display: flex;
+    align-items: flex-end;
+    background-color: transparent;
+    margin-bottom: 20px;
+}
+
+.filter-section h5 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-control {
+    border-radius: 4px;
+    border-color: #007bff;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* Base card styles */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 300px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Hover effect for desktop */
+@media (min-width: 768px) {
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+
+    .card:hover::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 3px solid #007bff;
+        border-radius: inherit;
+        pointer-events: none;
+    }
+    
+    .card:hover .card-body {
+        background-color: #e3f2fd;
+    }
+
+    .card:hover .card-title {
+        color: #003d6f;
+    }
+}
+
+/* Mobile specific styles */
+@media (max-width: 767px) {
+    .card {
+        max-width: 100%;
+        margin: 10px 0;
+    }
+
+    .card:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        background-color: #f8f9fa;
+    }
+
+    .card-body {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+}
+
+.card-img-top {
+    border-bottom: 2px solid #007bff;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+}
+
+.card-body {
+    background-color: #bcdcfd95;
+    border-top: 1px solid #007bff;
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.card-title {
+    color: #005DA5;
+    font-size: 16px;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+}
+
+/* Style spécifique pour la carte de contact */
+.contact-card {
+    width: 100%;
+    font-size: 20px;
+    line-height: 1.2;
+    max-width: none;
+    margin: 0 auto;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.contact-card p {
+    margin-left: 20%;
+}
+
+/* Style spécifique pour la charte éthique */
+.ethique-card {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+.ethique-card h4 {
+    color: #005DA5;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.ethique-card p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/* Styles pour les tables */
+.table-container {
+    margin: 2rem auto;
+    max-width: 65%;
+    padding: 0 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: none;
+}
+
+.table thead {
+    background-color: transparent;
+    color: #005da5;
+}
+
+.table thead th {
+    border-bottom: none;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.qr-code-container {
+    margin: 2rem auto;
+    max-width: 75%;
+    text-align: center;
+}
+
+.qr-code-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Filter box styles */
+.filter-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: flex-start !important;
+    margin-left: 10px;
+    gap: 20px;
+}
+
+.filter-box .filter-section {
+    flex: 1;
+    text-align: center;
+}
+
+.filter-box .filter-section h5 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-box .filter-section button {
+    width: 100%;
+    background-color: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0 !important;
+}
+
+.filter-box .filter-section button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.filter-box .filter-section button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Cart styles */
+.cart-icon {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cart-icon:hover {
+    transform: scale(1.1);
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 12px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.cart-total {
+    font-weight: bold;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid #007bff;
+}
+
+.remove-item {
+    color: #dc3545;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Grid layout adjustments for mobile */
+@media (max-width: 767px) {
+    .row {
+        margin: 0 10px;
+    }
+    
+    [class*="col-"] {
+        padding: 0 5px;
+    }
+
+    .filter-box {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filter-section {
+        width: 100%;
+    }
+
+    .cart-icon {
+        top: 20px;
+        right: 20px;
+    }
+}
